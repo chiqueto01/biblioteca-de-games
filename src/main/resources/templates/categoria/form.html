@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="pt-br" th:replace="_layout :: layout(~{::title}, ~{::main})">
+<head><title>Categoria</title></head>
+<main>
+  <h2 th:text="${categoria.id} != null ? 'Editar Categoria' : 'Nova Categoria'">Categoria</h2>
+  <form th:action="@{/categorias}" method="post" th:object="${categoria}">
+    <input type="hidden" th:field="*{id}" />
+    <div><label>Nome</label><input th:field="*{nome}" placeholder="Aventura" required/></div>
+    <div><label>Descrição</label><textarea th:field="*{descricao}" rows="3"></textarea></div>
+    <div><label>Ícone (URL)</label><input th:field="*{iconeUrl}" placeholder="https://..."/></div>
+    <div><label>Ativo</label><input type="checkbox" th:field="*{ativo}"/></div>
+    <button type="submit">Salvar</button>
+  </form>
+</main>
+</html>

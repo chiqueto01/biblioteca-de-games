@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br" th:replace="_layout :: layout(~{::title}, ~{::main})">
+<head><title>Jogo</title></head>
+<main>
+  <h2 th:text="${jogo.id} != null ? 'Editar Jogo' : 'Novo Jogo'">Jogo</h2>
+  <form th:action="@{/jogos}" method="post" th:object="${jogo}">
+    <input type="hidden" th:field="*{id}"/>
+    <div><label>Título</label><input th:field="*{titulo}" required/></div>
+    <div><label>Autor</label><input th:field="*{autor}"/></div>
+    <div><label>Gênero</label><input th:field="*{genero}"/></div>
+    <div><label>Plataforma</label><input th:field="*{plataforma}"/></div>
+    <div><label>Nota</label><input th:field="*{nota}" type="number" min="0" max="10" step="0.1"/></div>
+    <div><label>Dificuldade</label>
+      <select th:field="*{dificuldade}">
+        <option th:value="FACIL">Fácil</option>
+        <option th:value="MEDIO">Médio</option>
+        <option th:value="DIFICIL">Difícil</option>
+      </select>
+    </div>
+    <div><label>Multiplayer</label><input type="checkbox" th:field="*{multiplayer}"/></div>
+    <div><label>URL Capa</label><input th:field="*{urlCapa}" placeholder="https://..."/></div>
+    <div><label>Categoria</label>
+      <select th:field="*{categoria}" required>
+        <option th:each="c : ${categorias}" th:value="${c.id}" th:text="${c.nome}"></option>
+      </select>
+    </div>
+    <button type="submit">Salvar</button>
+  </form>
+</main>
+</html>

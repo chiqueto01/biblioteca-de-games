@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br" th:replace="_layout :: layout(~{::title}, ~{::main})">
+<head><title>Jogos</title></head>
+<main>
+  <h2>Jogos</h2>
+  <table>
+    <thead>
+      <tr><th>Capa</th><th>Título</th><th>Categoria</th><th>Plataforma</th><th>Nota</th><th>Ações</th></tr>
+    </thead>
+    <tbody>
+      <tr th:each="j : ${jogos}">
+        <td><img th:src="${j.urlCapa}" alt="capa" width="48" height="48" style="object-fit:cover"/></td>
+        <td th:text="${j.titulo}">Titulo</td>
+        <td th:text="${j.categoria != null ? j.categoria.nome : '-'}">Categoria</td>
+        <td th:text="${j.plataforma}">PC</td>
+        <td th:text="${j.nota}">8.5</td>
+        <td>
+          <a th:href="@{'/jogos/' + ${j.id} + '/editar'}">Editar</a>
+          <form th:action="@{'/jogos/' + ${j.id} + '/excluir'}" method="post" style="display:inline">
+            <button type="submit">Excluir</button>
+          </form>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</main>
+</html>

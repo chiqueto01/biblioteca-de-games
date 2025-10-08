@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br" th:replace="_layout :: layout(~{::title}, ~{::main})">
+<head><title>Categorias</title></head>
+<main>
+  <h2>Categorias</h2>
+  <table>
+    <thead><tr><th>Nome</th><th>Ativo</th><th>Ações</th></tr></thead>
+    <tbody>
+      <tr th:each="c : ${categorias}">
+        <td th:text="${c.nome}">Nome</td>
+        <td><span th:text="${c.ativo} ? 'Sim' : 'Não'">Sim</span></td>
+        <td>
+          <a th:href="@{'/categorias/' + ${c.id} + '/editar'}">Editar</a>
+          <form th:action="@{'/categorias/' + ${c.id} + '/excluir'}" method="post" style="display:inline">
+            <button type="submit">Excluir</button>
+          </form>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</main>
+</html>
